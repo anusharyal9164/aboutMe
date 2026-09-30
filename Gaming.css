@@ -9,9 +9,10 @@ body {
   background: #f7f5fa;
 }
 
-h2 { color: #502883; margin-top: 0; }
+h2 { color: #43197a; margin-top: 0; }
+h3.section-sub { color: #43197a; margin-top: 30px; }
 
-
+/* ---------- Header (centered) ---------- */
 header {
   background-color: #43197a;
   color: #eceaea;
@@ -25,7 +26,6 @@ header h1 {
 }
 
 header p { margin: 0; }
-
 
 .logo-box {
   width: 64px;
@@ -41,7 +41,7 @@ header p { margin: 0; }
   opacity: 0.8;
 }
 
-
+/* ---------- Navigation ---------- */
 nav {
   background: #2f1156;
   text-align: center;
@@ -54,10 +54,12 @@ nav a {
   margin: 0 14px;
 }
 
+nav a.active { font-weight: bold; text-decoration: underline; }
+
 nav a:hover,
 nav a:focus { text-decoration: underline; }
 
-
+/* ---------- Layout ---------- */
 main {
   max-width: 1000px;
   margin: 0 auto;
@@ -69,7 +71,7 @@ main section { margin-bottom: 40px; }
 html { scroll-behavior: smooth; }
 section[id] { scroll-margin-top: 20px; }
 
-
+/* ---------- Hero image ---------- */
 .java img {
   width: 100%;
   max-width: 900px;
@@ -78,7 +80,7 @@ section[id] { scroll-margin-top: 20px; }
   border-radius: 10px;
 }
 
-
+/* ---------- Timeline table ---------- */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -93,7 +95,7 @@ th, td {
 
 th { background: #e9def7; }
 
-
+/* ---------- Photo gallery ---------- */
 .gallery {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -116,7 +118,12 @@ th { background: #e9def7; }
   font-style: italic;
 }
 
+/* Bigger gallery page: 3 columns on wide screens */
+.gallery.gallery-wide {
+  grid-template-columns: repeat(3, 1fr);
+}
 
+/* ---------- Video and map (responsive) ---------- */
 .video-wrap,
 .map-wrap {
   position: relative;
@@ -137,7 +144,6 @@ th { background: #e9def7; }
   border: 0;
 }
 
-
 .videos {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -152,7 +158,94 @@ th { background: #e9def7; }
 
 .extras { text-align: center; }
 
+/* ---------- Buttons: link to other pages ---------- */
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
 
+.picture-button {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.picture-button:hover,
+.picture-button:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.picture-button img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.picture-button span {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  color: #43197a;
+}
+
+.cta-button {
+  display: inline-block;
+  background: #43197a;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-weight: bold;
+  margin-top: 16px;
+}
+
+.cta-button:hover,
+.cta-button:focus { background: #2f1156; }
+
+.cta-wrap { text-align: center; }
+
+/* Plain text/icon buttons used on the home page for Location / Graphic Designer */
+.text-button {
+  display: block;
+  text-decoration: none;
+  color: #43197a;
+  background: #fff;
+  border: 2px solid #43197a;
+  border-radius: 10px;
+  padding: 30px 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.text-button:hover,
+.text-button:focus {
+  background: #43197a;
+  color: #fff;
+}
+
+/* ---------- Placeholder boxes (for content not uploaded yet) ---------- */
+.placeholder-box {
+  border: 2px dashed #a58bcf;
+  border-radius: 10px;
+  padding: 40px 20px;
+  text-align: center;
+  color: #6b4d9c;
+  background: #efe7fa;
+}
+
+/* ---------- Footer ---------- */
 footer {
   background-color: #43197a;
   color: white;
@@ -164,8 +257,10 @@ footer {
 footer p { margin: 4px 0; }
 .credit { font-size: 0.85rem; opacity: 0.8; }
 
-
+/* ---------- Mobile: stack photos in one column ---------- */
 @media (max-width: 600px) {
-  .gallery, .videos { grid-template-columns: 1fr; }
+  .gallery,
+  .gallery.gallery-wide,
+  .videos { grid-template-columns: 1fr; }
   .gallery img { height: 260px; }
 }
