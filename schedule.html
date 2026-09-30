@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Schedule Appointment | Knightwolf</title>
+  <link rel="stylesheet" href="Gaming.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo-box" aria-label="Logo placeholder">LOGO</div>
+    <h1>KNIGHTWOLF</h1>
+    <p>Book a time to work together.</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="photography.html">Photography</a>
+    <a href="location.html">Location</a>
+    <a href="animation.html">Animation</a>
+    <a href="graphic-designer.html">Graphic Designer</a>
+    <a href="schedule.html" class="active">Schedule</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2 class="form-intro">Schedule an Appointment</h2>
+
+      <!--
+        To receive submissions, create a free form at https://formspree.io,
+        then replace YOUR_FORM_ID below with the ID it gives you.
+      -->
+      <form class="appointment-form" id="appointment-form"
+            action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your full name" autocomplete="name" required>
+        </div>
+
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        </div>
+
+        <div class="form-field">
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" autocomplete="tel" required>
+        </div>
+
+        <div class="form-field">
+          <label for="country">Country</label>
+          <select id="country" name="country" required>
+            <option value="" selected disabled>Select a country</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="state">State</label>
+          <select id="state" name="state" required disabled>
+            <option value="" selected disabled>Select a country first</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="appointment">Appointment for</label>
+          <select id="appointment" name="appointment" required>
+            <option value="" selected disabled>Select a service</option>
+            <option value="Photography">Photography</option>
+            <option value="Animation">Animation</option>
+            <option value="Graphic Design">Graphic Design</option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit-button">Schedule Appointment</button>
+        <p class="form-message" id="form-message" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Taking a bite from everything: you can get a chance to experience different flavours.</p>
+    <p class="credit">Anush Aryal Photography</p>
+  </footer>
+
+  <script>
+    // Country -> State/Province/Region lists
+    var regions = {
+      "United States": ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"],
+      "Canada": ["Alberta","British Columbia","Manitoba","New Brunswick","Newfoundland and Labrador","Nova Scotia","Ontario","Prince Edward Island","Quebec","Saskatchewan","Northwest Territories","Nunavut","Yukon"],
+      "Nepal": ["Koshi","Madhesh","Bagmati","Gandaki","Lumbini","Karnali","Sudurpashchim"],
+      "India": ["Andhra Pradesh","Bihar","Delhi","Gujarat","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Punjab","Rajasthan","Tamil Nadu","Telangana","Uttar Pradesh","West Bengal","Other"],
+      "United Kingdom": ["England","Scotland","Wales","Northern Ireland"],
+      "Australia": ["New South Wales","Queensland","South Australia","Tasmania","Victoria","Western Australia","Australian Capital Territory","Northern Territory"]
+    };
+
+    var countrySelect = document.getElementById("country");
+    var stateSelect = document.getElementById("state");
+
+    Object.keys(regions).forEach(function (c) {
+      var opt = document.createElement("option");
+      opt.value = c;
+      opt.textContent = c;
+      countrySelect.appendChild(opt);
+    });
+
+    countrySelect.addEventListener("change", function () {
+      var list = regions[countrySelect.value] || [];
+      stateSelect.innerHTML = '<option value="" selected disabled>Select a state</option>';
+      list.forEach(function (s) {
+        var opt = document.createElement("option");
+        opt.value = s;
+        opt.textContent = s;
+        stateSelect.appendChild(opt);
+      });
+      stateSelect.disabled = false;
+    });
+
+    // Submit without leaving the page
+    var form = document.getElementById("appointment-form");
+    var message = document.getElementById("form-message");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { "Accept": "application/json" }
+      }).then(function (res) {
+        if (res.ok) {
+          message.textContent = "Thank you! Your appointment request was sent.";
+          form.reset();
+          stateSelect.innerHTML = '<option value="" selected disabled>Select a country first</option>';
+          stateSelect.disabled = true;
+        } else {
+          message.textContent = "Something went wrong. Please try again.";
+        }
+        message.classList.add("show");
+      }).catch(function () {
+        message.textContent = "Could not send. Check your connection and try again.";
+        message.classList.add("show");
+      });
+    });
+  </script>
+
+</body>
+</html>
