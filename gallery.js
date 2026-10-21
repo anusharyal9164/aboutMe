@@ -26,7 +26,7 @@
   document.head.appendChild(css);
 
   var box = document.createElement('div');
-  box.id = 'lightbox';
+  box.id = 'gallerybox';
   box.setAttribute('role', 'dialog');
   box.setAttribute('aria-modal', 'true');
   box.innerHTML = '<button class="lb-close" aria-label="Close">&#10005;</button>' +
