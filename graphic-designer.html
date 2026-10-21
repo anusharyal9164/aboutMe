@@ -4,40 +4,119 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graphic Designer | Anush Aryal</title>
+  <title>Graphic Designer | Knightwolf</title>
   <link rel="stylesheet" href="Gaming.css">
+  <style>
+    /* Posters show in full (no cropping) */
+    .gallery.gallery-posters { align-items: start; }
+    .gallery.gallery-posters img { height: auto; object-fit: contain; background: #fff; }
+    /* Logos show in full on a white card */
+    .gallery.gallery-logos img { height: auto; aspect-ratio: 1 / 1; object-fit: contain; background: #fff; border: 1px solid #d9cbee; }
+  </style>
 </head>
 <body>
 
   <header>
     <div class="logo-box" aria-label="Logo placeholder">LOGO</div>
-    <h1>Anush Aryal</h1>
+    <h1>KNIGHTWOLF</h1>
     <p>These are some of my works that I did.</p>
   </header>
 
   <nav>
     <a href="index.html">Home</a>
     <a href="photography.html">Photography</a>
-    <a href="location.html">Location</a>
     <a href="animation.html">Animation</a>
-    <a href="schedule.html">Schedule Appointment</a>
     <a href="graphic-designer.html" class="active">Graphic Designer</a>
+    <a href="schedule.html">Schedule</a>
   </nav>
 
   <main>
     <h2>Graphic Designer</h2>
+    <p>Click any design to view it larger.</p>
 
     <h3 class="section-sub">Posters &amp; Flyers</h3>
+    <div class="gallery gallery-wide gallery-posters">
+      <figure>
+        <img src="Dochha_brand.png" alt="Dochha shoe brand poster with a red and teal woven slip-on shoe">
+        <figcaption>Dochha Brand Poster</figcaption>
+      </figure>
+      <figure>
+        <img src="Dochha_shoes.png" alt="Dochha poster with repeated DOCHHA text behind two woven slip-on shoes">
+        <figcaption>Dochha Shoes Poster</figcaption>
+      </figure>
+      <figure>
+        <img src="Porche_Carrera911.png" alt="Porsche Carrera 911 poster with a white car and a black and white rear view">
+        <figcaption>Porsche Carrera 911 Poster</figcaption>
+      </figure>
+      <figure>
+        <img src="ACM_General.png" alt="ACM chapter about us flyer with meeting time, key events and QR codes">
+        <figcaption>ACM General Meeting Flyer</figcaption>
+      </figure>
+      <figure>
+        <img src="Carwash.png" alt="RAD Car Wash flyer with a blue jeep and two people washing it">
+        <figcaption>RAD Car Wash Flyer</figcaption>
+      </figure>
+      <figure>
+        <img src="Lemonade.png" alt="RAD Lemonade sale flyer with lemons and lemonade glasses">
+        <figcaption>RAD Lemonade Flyer</figcaption>
+      </figure>
+      <figure>
+        <img src="SIGGRAPH_2025.png" alt="SIGGRAPH 2025 poster with a wireframe dinosaur, Mars and a person in a headset">
+        <figcaption>SIGGRAPH 2025 Poster</figcaption>
+      </figure>
+      <figure>
+        <img src="Siggpaph_2024.png" alt="SIGGRAPH 2024 poster with a circuit board, robot hands and the Earth">
+        <figcaption>SIGGRAPH 2024 Poster</figcaption>
+      </figure>
+    </div>
 
     <h3 class="section-sub">Logos</h3>
-
-    <h3 class="section-sub">Social Media Content</h3>
+    <div class="gallery gallery-wide gallery-logos">
+      <figure>
+        <img src="Minimilist_Manco___Manco.png" alt="Manco and Manco round purple and green pizza logo">
+        <figcaption>Manco &amp; Manco Minimalist</figcaption>
+      </figure>
+      <figure>
+        <img src="Nieves_Creative.png" alt="Nieves Creative Co. logo with a hand holding a camera">
+        <figcaption>Nieves Creative Co.</figcaption>
+      </figure>
+      <figure>
+        <img src="Philly_X_Manco___Manco.png" alt="Manco and Manco baseball style logo">
+        <figcaption>Philly X Manco &amp; Manco</figcaption>
+      </figure>
+      <figure>
+        <img src="Picnic_table_green.png" alt="Manco and Manco pizza plate logo on green checkered cloth">
+        <figcaption>Picnic Table (Green)</figcaption>
+      </figure>
+      <figure>
+        <img src="Picnic_table.png" alt="Manco and Manco pizza plate logo on purple checkered cloth">
+        <figcaption>Picnic Table (Purple)</figcaption>
+      </figure>
+      <figure>
+        <img src="Pizza_on_Hand.png" alt="Manco and Manco sticker with a hand holding a pizza slice">
+        <figcaption>Pizza on Hand Sticker</figcaption>
+      </figure>
+      <figure>
+        <img src="Pizza.png" alt="Manco and Manco sticker or t-shirt pocket logo on a pizza peel">
+        <figcaption>Pizza Peel Sticker / T-Shirt Pocket</figcaption>
+      </figure>
+      <figure>
+        <img src="shield_logo.png" alt="Manco and Manco Pizza shield logo with two pizza slices">
+        <figcaption>Shield Logo</figcaption>
+      </figure>
+      <figure>
+        <img src="Rowan_first.png" alt="First Generation logo with a raised fist holding a diploma">
+        <figcaption>Rowan First Generation</figcaption>
+      </figure>
+    </div>
   </main>
 
   <footer>
     <p>Taking a bite from everything: you can get a chance to experience different flavours.</p>
     <p class="credit">Anush Aryal Photography</p>
   </footer>
+
+  <script src="gallery.js"></script>
 
 </body>
 </html>
