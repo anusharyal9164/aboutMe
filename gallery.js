@@ -1,10 +1,11 @@
 // Full-screen photo viewer: click a photo -> page goes dark and the photo pops up in front.
 // Close with the X (top right), Esc, clicking the dark area, or the browser Back button.
 // Arrow keys / on-screen arrows move between photos. Carries its own styles.
+<script>
 (function () {
   var imgs = Array.prototype.slice.call(document.querySelectorAll('.gallery img'));
   if (!imgs.length) return;
- 
+
   var css = document.createElement('style');
   css.textContent =
     '.gallery img{cursor:zoom-in}' +
@@ -23,7 +24,7 @@
     '#lightbox .lb-prev{left:12px;top:50%;transform:translateY(-50%)}' +
     '#lightbox .lb-next{right:12px;top:50%;transform:translateY(-50%)}';
   document.head.appendChild(css);
- 
+
   var box = document.createElement('div');
   box.id = 'lightbox';
   box.setAttribute('role', 'dialog');
@@ -34,7 +35,7 @@
     '<button class="lb-next" aria-label="Next">&#8250;</button>';
   document.body.appendChild(box);
   var big = box.querySelector('img'), cap = box.querySelector('.lb-caption'), cur = 0;
- 
+
   function show(i) {
     cur = (i + imgs.length) % imgs.length;
     big.src = imgs[cur].src; big.alt = imgs[cur].alt;
@@ -52,7 +53,7 @@
     hide();
   }
   window.addEventListener('popstate', hide);
- 
+
   imgs.forEach(function (img, i) {
     img.tabIndex = 0; img.setAttribute('role', 'button');
     img.addEventListener('click', function () { open(i); });
@@ -69,3 +70,4 @@
     if (e.key === 'ArrowRight') show(cur + 1);
   });
 })();
+</script>
