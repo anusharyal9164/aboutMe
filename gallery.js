@@ -56,7 +56,7 @@
   panel.setAttribute('aria-label', 'Photo viewer');
   panel.innerHTML =
     '<div class="gv-head">' +
-      '<div class="gv-logo">KW</div><div class="gv-site">Knightwolf</div>' +
+      '<div class="gv-logo">AA</div><div class="gv-site">Anush Aryal</div>' +
       '<button class="gv-icon gv-prev" aria-label="Previous photo">&#8249;</button>' +
       '<button class="gv-icon gv-next" aria-label="Next photo">&#8250;</button>' +
       '<button class="gv-icon gv-close" aria-label="Close">&#10005;</button>' +
