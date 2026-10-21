@@ -1,6 +1,6 @@
-// Click any gallery photo to view it full screen, in front of the page.
-// Arrow keys / on-screen arrows move between photos; Esc or clicking outside closes.
-// This file carries its own styles, so it works even if Gaming.css is an older copy.
+// Full-screen photo viewer: click a photo -> page goes dark and the photo pops up in front.
+// Close with the X (top right), Esc, clicking the dark area, or the browser Back button.
+// Arrow keys / on-screen arrows move between photos. Carries its own styles.
 (function () {
   var imgs = Array.prototype.slice.call(document.querySelectorAll('.gallery img'));
   if (!imgs.length) return;
@@ -9,16 +9,17 @@
   css.textContent =
     '.gallery img{cursor:zoom-in}' +
     '#lightbox{position:fixed!important;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;' +
-    'z-index:2147483647;background:rgba(10,4,20,.95);display:none;align-items:center;' +
+    'z-index:2147483647;background:rgba(0,0,0,.88);display:none;align-items:center;' +
     'justify-content:center;flex-direction:column;margin:0;padding:0}' +
     '#lightbox.open{display:flex}' +
-    '#lightbox img{max-width:96vw;max-height:84vh;width:auto;height:auto;object-fit:contain;' +
-    'border-radius:6px;cursor:default;display:block}' +
+    '#lightbox img{max-width:94vw;max-height:84vh;width:auto;height:auto;object-fit:contain;' +
+    'border-radius:6px;cursor:default;display:block;box-shadow:0 8px 40px rgba(0,0,0,.6)}' +
     '#lightbox .lb-caption{color:#eceaea;margin-top:12px;font-style:italic;font-family:Georgia,serif}' +
-    '#lightbox button{position:absolute;background:rgba(255,255,255,.15);color:#fff;border:0;' +
-    'font-size:2rem;width:52px;height:52px;border-radius:50%;cursor:pointer;line-height:1}' +
-    '#lightbox button:hover,#lightbox button:focus{background:rgba(255,255,255,.35)}' +
-    '#lightbox .lb-close{top:16px;right:16px}' +
+    '#lightbox button{position:absolute;background:rgba(255,255,255,.18);color:#fff;border:0;' +
+    'font-size:2rem;width:52px;height:52px;border-radius:50%;cursor:pointer;line-height:1;padding:0}' +
+    '#lightbox button:hover,#lightbox button:focus{background:rgba(255,255,255,.4)}' +
+    '#lightbox .lb-close{top:18px;right:18px;width:48px;height:48px;font-size:1.8rem;' +
+    'border:2px solid rgba(255,255,255,.7)}' +
     '#lightbox .lb-prev{left:12px;top:50%;transform:translateY(-50%)}' +
     '#lightbox .lb-next{right:12px;top:50%;transform:translateY(-50%)}';
   document.head.appendChild(css);
@@ -27,7 +28,7 @@
   box.id = 'lightbox';
   box.setAttribute('role', 'dialog');
   box.setAttribute('aria-modal', 'true');
-  box.innerHTML = '<button class="lb-close" aria-label="Close">&times;</button>' +
+  box.innerHTML = '<button class="lb-close" aria-label="Close">&#10005;</button>' +
     '<button class="lb-prev" aria-label="Previous">&#8249;</button>' +
     '<img alt=""><div class="lb-caption"></div>' +
     '<button class="lb-next" aria-label="Next">&#8250;</button>';
@@ -40,8 +41,17 @@
     var fc = imgs[cur].parentNode.querySelector('figcaption');
     cap.textContent = fc ? fc.textContent : '';
   }
-  function open(i) { show(i); box.classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function close() { box.classList.remove('open'); document.body.style.overflow = ''; }
+  function hide() { box.classList.remove('open'); document.body.style.overflow = ''; }
+  function open(i) {
+    show(i); box.classList.add('open'); document.body.style.overflow = 'hidden';
+    try { history.pushState({ lb: 1 }, ''); } catch (e) {}
+  }
+  function close() {
+    if (!box.classList.contains('open')) return;
+    if (history.state && history.state.lb) { try { history.back(); return; } catch (e) {} }
+    hide();
+  }
+  window.addEventListener('popstate', hide);
  
   imgs.forEach(function (img, i) {
     img.tabIndex = 0; img.setAttribute('role', 'button');
